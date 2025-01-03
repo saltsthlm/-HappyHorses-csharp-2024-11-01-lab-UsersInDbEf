@@ -26,7 +26,7 @@ class Program
 
         foreach (var user in queryAllUsers)
         {
-            Console.WriteLine(user.FirstName);
+            Console.WriteLine (user.FirstName+" "+ user.LastName);
         }
     }
 }
