@@ -1,42 +1,20 @@
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+namespace UserAddressDbEf.models;
 
-public class UserAdressContext : DbContext
-{
-    public DbSet<User>? Users { get; set; }
-    public DbSet<Adress>? Adress { get; set; }
-
-    public string DbPath { get; }
-
-    public UserAdressContext()
+    public class User
     {
-        var folder = Environment.SpecialFolder.LocalApplicationData;
-        var path = Environment.GetFolderPath(folder);
-        DbPath = System.IO.Path.Join(path, "localhost.db");
+        public int Id { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Email { get; set; }
+       
+        public virtual Address Address { get; set; }
     }
-
-
-    protected override void OnConfiguring(DbContextOptionsBuilder options)
-        => options.UseSqlServer($"Data Source={DbPath}");
-}
-
-public class User
-{
-    [Key]
-    public int UserId { get; set; }
-    public int Name { get; set; }
-
-    public List<Adress> Adress { get; } = new();
-}
-
-public class Adress
-{
-    public int AdressId { get; set; }
-    public string PostalCode { get; set; }
-    public string StreetName { get; set; }
-
-    public int UserId { get; set; }
-    public User User { get; set; }
-}
+    public class Address
+    {
+        public int Id { get; set; }
+        public string Street { get; set; }
+        public string City { get; set; }
+        public string PostalCode { get; set; }
+        public int UserId { get; set; }
+        public virtual User User { get; set; }
+    }
