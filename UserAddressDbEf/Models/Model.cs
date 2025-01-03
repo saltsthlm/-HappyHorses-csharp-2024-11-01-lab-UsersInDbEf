@@ -1,7 +1,10 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace UserAddressDbEf.Models;
 
 public class User
 {
+    [Key]
     public int Id { get; set; }
     public required string FirstName { get; set; }
     public required string LastName { get; set; }
@@ -12,6 +15,7 @@ public class User
 
 public class Address
 {
+    [Key]
     public int Id { get; set; }
     public required string Street { get; set; }
     public required string City { get; set; }
